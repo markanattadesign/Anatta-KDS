@@ -1,0 +1,28 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node -r dotenv/config ../../node_modules/next/dist/bin/next dev -p ${PORT:-3000} dotenv_config_path=../../.env",
+    "build": "next build",
+    "start": "next start -p ${PORT:-3000}",
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "@kds/contracts": "*",
+    "@kds/db": "*",
+    "@kds/domain": "*",
+    "dotenv": "^16.4.5",
+    "iron-session": "^8.0.4",
+    "next": "15.5.28",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
+    "typescript": "^5.6.3"
+  }
+}

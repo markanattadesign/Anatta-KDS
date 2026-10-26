@@ -1,0 +1,30 @@
+{
+  "name": "edible-kds",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run db:up && npm run db:migrate && npm run db:seed && npm run dev -w web",
+    "build": "npm run build -w web",
+    "start": "npm run start -w web",
+    "test": "npm run test -w @kds/contracts && npm run test -w @kds/domain",
+    "typecheck": "npm run build -w @kds/contracts && npm run build -w @kds/db && npm run build -w @kds/domain && npm run typecheck -w web",
+    "db:up": "bash infra/local-postgres.sh up",
+    "db:down": "bash infra/local-postgres.sh down",
+    "db:migrate": "npm run migrate -w @kds/db",
+    "db:seed": "npm run seed -w @kds/db",
+    "db:reset": "npm run reset -w @kds/db",
+    "simulate": "tsx scripts/simulate.ts",
+    "simulate:day": "tsx scripts/simulate-day.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=22.13"
+  }
+}

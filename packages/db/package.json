@@ -1,0 +1,30 @@
+{
+  "name": "@kds/db",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "tsc --noEmit -p .",
+    "generate": "drizzle-kit generate",
+    "migrate": "tsx src/scripts.ts migrate",
+    "seed": "tsx src/scripts.ts seed",
+    "reset": "tsx src/scripts.ts reset"
+  },
+  "dependencies": {
+    "@kds/contracts": "*",
+    "@paralleldrive/cuid2": "^2.2.2",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.45.4",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/pg": "^8.11.10",
+    "drizzle-kit": "^0.31.11",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}

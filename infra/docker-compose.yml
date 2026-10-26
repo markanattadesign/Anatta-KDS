@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: kds
+      POSTGRES_PASSWORD: kds
+      POSTGRES_DB: kds
+    ports:
+      - "5432:5432"
+    volumes:
+      - kds-pg:/var/lib/postgresql/data
+volumes:
+  kds-pg:

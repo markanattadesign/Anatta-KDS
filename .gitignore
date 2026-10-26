@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+.env
+.env.*
+!env.example
+.pgdata/
+*.log
+.DS_Store
+next-env.d.ts
