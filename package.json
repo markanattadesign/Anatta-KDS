@@ -7,7 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm run db:up && npm run db:migrate && npm run db:seed && npm run dev -w web",
+    "dev": "npm run setup && npm run dev -w web",
     "build": "npm run build -w web",
     "start": "npm run start -w web",
     "test": "npm run test -w @kds/contracts && npm run test -w @kds/domain",
@@ -17,12 +17,16 @@
     "db:migrate": "npm run migrate -w @kds/db",
     "db:seed": "npm run seed -w @kds/db",
     "db:reset": "npm run reset -w @kds/db",
-    "simulate": "tsx scripts/simulate.ts",
-    "simulate:day": "tsx scripts/simulate-day.ts"
+    "simulate": "tsx scripts/simulate.mts",
+    "db:generate": "npm run generate -w @kds/db",
+    "setup": "npm run db:up && npm run db:migrate && npm run db:seed",
+    "smoke": "tsx scripts/smoke.mts"
   },
   "devDependencies": {
     "tsx": "^4.19.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "@kds/contracts": "*",
+    "dotenv": "^16.4.5"
   },
   "engines": {
     "node": ">=22.13"

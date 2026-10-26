@@ -1,5 +1,5 @@
 {
-  "id": "554c17f4-0f8f-4b9b-a8bc-0bf1d70f7802",
+  "id": "24c23706-16ba-4e65-961d-e8e78b9a79fa",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -1011,6 +1011,13 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "sort_order": {
+          "name": "sort_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
         },
         "name": {
           "name": "name",

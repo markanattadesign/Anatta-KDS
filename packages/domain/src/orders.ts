@@ -128,7 +128,7 @@ export async function createOrder(
           })
           .returning();
         await tx.insert(tasks).values(
-          recipe.body.steps.map((s) => {
+          recipe.body.steps.map((s, idx) => {
             const stationId = stationByKind.get(s.stationKind);
             if (!stationId) throw invalid(`No active ${s.stationKind} station in this store`);
             stationIds.add(stationId);
@@ -139,6 +139,7 @@ export async function createOrder(
               orderItemId: oi!.id,
               stationId,
               stepKey: s.key,
+              sortOrder: idx,
               name: s.name,
               instructions: s.instructions,
               durationSec: s.durationSec,
@@ -248,7 +249,8 @@ export async function listOrders(storeId: string, opts: { status?: OrderStatus; 
       promisedAt: orders.promisedAt,
       createdAt: orders.createdAt,
       completedAt: orders.completedAt,
-      itemCount: sql<number>`(select coalesce(sum(${orderItems.quantity}),0)::int from ${orderItems} where ${orderItems.orderId} = ${orders.id})`,
+      // Explicit table names: Drizzle emits unqualified columns here, which would be ambiguous inside the subquery.
+      itemCount: sql<number>`(select coalesce(sum(oi.quantity), 0)::int from order_items oi where oi.order_id = "orders"."id")`,
     })
     .from(orders)
     .where(opts.status ? and(eq(orders.storeId, storeId), eq(orders.status, opts.status)) : eq(orders.storeId, storeId))
@@ -267,7 +269,7 @@ export async function getOrderDetail(storeId: string, orderId: string) {
     .innerJoin(stations, eq(stations.id, tasks.stationId))
     .leftJoin(users, eq(users.id, tasks.claimedBy))
     .where(eq(tasks.orderId, orderId))
-    .orderBy(asc(tasks.createdAt));
+    .orderBy(asc(tasks.createdAt), asc(tasks.sortOrder));
   const events = await db
     .select({ event: orderEvents, actorName: users.name })
     .from(orderEvents)

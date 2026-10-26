@@ -56,7 +56,7 @@ export type DefectCode = (typeof DEFECT_CODES)[number];
 export const QC_CHECKLIST = [
   { key: "matches_ticket", label: "Matches the ticket (product + size)" },
   { key: "fruit_quality", label: "Fruit fresh, firm, no bruising" },
-  { key: "chocolate_finish", label: "Chocolate set, clean finish" },
+  { key: "chocolate_finish", label: "Chocolate set, clean finish (if any)" },
   { key: "secure", label: "Skewers secure, container sealed" },
 ] as const;
 

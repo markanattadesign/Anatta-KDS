@@ -150,6 +150,8 @@ export const tasks = pgTable(
     orderItemId: text("order_item_id").notNull().references(() => orderItems.id, { onDelete: "cascade" }),
     stationId: text("station_id").notNull().references(() => stations.id),
     stepKey: text("step_key").notNull(),
+    /** Position of the step in the recipe, for stable display order. */
+    sortOrder: integer("sort_order").notNull().default(0),
     name: text("name").notNull(),
     instructions: text("instructions").notNull().default(""),
     durationSec: integer("duration_sec").notNull(),

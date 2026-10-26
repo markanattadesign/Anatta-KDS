@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node -r dotenv/config ../../node_modules/next/dist/bin/next dev -p ${PORT:-3000} dotenv_config_path=../../.env",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start -p ${PORT:-3000}",
+    "start": "next start",
     "typecheck": "tsc --noEmit -p ."
   },
   "dependencies": {

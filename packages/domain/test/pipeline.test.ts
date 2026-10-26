@@ -13,6 +13,7 @@ import {
   handoffOrder,
   ingestDemoWebhook,
   inspectItem,
+  listOrders,
   readOutbox,
   signDemoPayload,
   stageOrder,
@@ -79,6 +80,20 @@ describe("order intake", () => {
     const results = await Promise.all([createOrder(ctx.storeId, input), createOrder(ctx.storeId, input), createOrder(ctx.storeId, input)]);
     expect(new Set(results.map((r) => r.order.id)).size).toBe(1);
     expect(results.filter((r) => r.created)).toHaveLength(1);
+  });
+
+  it("lists orders with their item counts", async () => {
+    const { order } = await createOrder(ctx.storeId, {
+      customerName: "Count",
+      fulfillmentType: "PICKUP",
+      promisedAt: inMinutes(40),
+      items: [
+        { sku: "FC-3", quantity: 2 },
+        { sku: "SB-01", quantity: 1 },
+      ],
+    });
+    const rows = await listOrders(ctx.storeId);
+    expect(rows.find((r) => r.id === order.id)?.itemCount).toBe(3);
   });
 
   it("rejects unknown SKUs without writing anything", async () => {

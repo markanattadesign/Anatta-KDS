@@ -128,6 +128,7 @@ CREATE TABLE "tasks" (
 	"order_item_id" text NOT NULL,
 	"station_id" text NOT NULL,
 	"step_key" text NOT NULL,
+	"sort_order" integer DEFAULT 0 NOT NULL,
 	"name" text NOT NULL,
 	"instructions" text DEFAULT '' NOT NULL,
 	"duration_sec" integer NOT NULL,

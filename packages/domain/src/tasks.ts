@@ -166,7 +166,7 @@ export async function getStationQueue(storeId: string, stationId: string) {
         ne(orders.status, "CANCELLED"),
       ),
     )
-    .orderBy(asc(orders.createdAt), asc(tasks.createdAt));
+    .orderBy(asc(orders.promisedAt), asc(orders.createdAt), asc(tasks.createdAt), asc(tasks.sortOrder));
 
   // For blocked tasks: which sibling steps are they waiting on, and where?
   const itemIds = [...new Set(rows.filter((r) => r.task.status === "BLOCKED").map((r) => r.item.id))];

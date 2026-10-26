@@ -89,6 +89,7 @@ export async function inspectItem(storeId: string, orderItemId: string, rawInput
         orderItemId,
         stationId: station,
         stepKey: `rework-${attempts}`,
+        sortOrder: 100 + attempts,
         name: `Rework: ${item.name}`,
         instructions: [input.defectCodes.map((c) => c.replaceAll("_", " ").toLowerCase()).join(", "), input.notes]
           .filter(Boolean)
